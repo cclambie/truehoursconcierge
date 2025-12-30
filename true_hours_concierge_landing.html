@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Hours Concierge - Never Lose a Customer to Wrong Opening Hours</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1F2933;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #1F2933;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header-cta {
+            background: #FF7A1A;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .header-cta:hover {
+            background: #E56710;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,122,26,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1F2933 0%, #2D3E50 100%);
+            color: #F3F4F6;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .hero .subheadline {
+            font-size: 22px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #FF7A1A;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #E56710;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,122,26,0.4);
+        }
+
+        .btn-secondary {
+            background: #d0a4a4;
+            color: black;
+            border: 2px solid #f69068;
+        }
+
+        .btn-secondary:hover {
+            background: #c09494;
+            color: black;
+        }
+
+        .btn-call {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-call:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+        }
+
+        .trust-line {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .trust-line a {
+            color: #FF7A1A;
+            text-decoration: underline;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-child(even) {
+            background: #F3F4F6;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1F2933;
+        }
+
+        h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1F2933;
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+            font-size: 18px;
+            color: #4B5563;
+        }
+
+        /* Problem Section */
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: #4B5563;
+        }
+
+        .problem-content p {
+            margin-bottom: 20px;
+        }
+
+        .problem-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .problem-list li {
+            padding: 15px 0 15px 40px;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .problem-list li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #e53e3e;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #FF7A1A;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Solution Section */
+        .solution-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .benefit-card h3 {
+            color: #FF7A1A;
+            margin-bottom: 15px;
+        }
+
+        /* Why Affordable Section */
+        .affordable-reasons {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .reason {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #FF7A1A;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .reason h3 {
+            color: #FF7A1A;
+            margin-bottom: 10px;
+        }
+
+        /* Sophie Section - Orange background, so white text is OK */
+        .sophie-section {
+            background: linear-gradient(135deg, #FF7A1A 0%, #E56710 100%);
+            color: #1F2933;
+        }
+
+        .sophie-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .sophie-image {
+            text-align: center;
+        }
+
+        .sophie-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .sophie-bio h2 {
+            color: white;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .sophie-bio p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: white;
+        }
+
+        .sophie-bio ul {
+            color: white;
+        }
+
+        .phone-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .phone-number a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Founder Section - Dark background, so white text is OK */
+        .founder-section {
+            background: #1F2933;
+            color: white;
+        }
+
+        .founder-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .founder-image {
+            text-align: center;
+        }
+
+        .founder-image img {
+            width: 245px;
+            height: 245px;
+            border-radius: 50%;
+            border: 5px solid #FF7A1A;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(255,122,26,0.3);
+        }
+
+        .founder-bio h2 {
+            color: white;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .founder-bio ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .founder-bio li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .founder-bio li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 20px;
+            color: #FF7A1A;
+        }
+
+        .founder-bio a {
+            color: #FF7A1A;
+            text-decoration: underline;
+        }
+
+        /* How It Works Section */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #FF7A1A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            color: #FF7A1A;
+            margin-bottom: 15px;
+        }
+
+        .step ul {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .step li {
+            margin-bottom: 8px;
+        }
+
+        /* Pricing Section */
+        .pricing-intro {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 50px;
+            color: #4B5563;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid #e2e8f0;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #FF7A1A;
+            transform: scale(1.05);
+        }
+
+        .plan-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF7A1A;
+            margin-bottom: 10px;
+        }
+
+        .plan-tagline {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .plan-price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1F2933;
+            margin-bottom: 5px;
+        }
+
+        .plan-price span {
+            font-size: 20px;
+            color: #718096;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FF7A1A;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .plan-cta {
+            background: #FF7A1A;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .plan-cta:hover {
+            background: #E56710;
+        }
+
+        .best-for {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .pricing-note {
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 25px;
+            background: #FFF7ED;
+            border-radius: 10px;
+            border-left: 4px solid #FF7A1A;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1F2933;
+            cursor: pointer;
+            position: relative;
+            padding-right: 50px;
+        }
+
+        .faq-question:after {
+            content: "+";
+            position: absolute;
+            right: 25px;
+            font-size: 28px;
+            color: #FF7A1A;
+        }
+
+        .faq-answer {
+            padding: 0 25px 25px;
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Contact Form Section - Dark background, so white text is OK */
+        .form-section {
+            background: linear-gradient(135deg, #1F2933 0%, #2D3E50 100%);
+            color: white;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .form-container h2 {
+            color: #1F2933;
+            margin-bottom: 10px;
+        }
+
+        .form-intro {
+            color: #4B5563;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1F2933;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF7A1A;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            background: #FF7A1A;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .form-submit:hover {
+            background: #E56710;
+        }
+
+        .form-note {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .form-note a {
+            color: #FF7A1A;
+            text-decoration: none;
+        }
+
+        /* Footer - Dark background, so white text is OK */
+        footer {
+            background: #1F2933;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #FF7A1A;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .subheadline {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .founder-content,
+            .sophie-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .founder-bio h2,
+            .sophie-bio h2 {
+                text-align: center;
+            }
+
+            .founder-bio ul {
+                text-align: left;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">True Hours Concierge</div>
+                <a href="#contact" class="header-cta">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Never Lose a Customer to Wrong Opening Hours Again</h1>
+            <p class="subheadline"><strong>True Hours Concierge</strong> keeps your Google Maps, website, and socials <em>accurate and up to date</em>—so customers always see the right hours, every time.</p>
+            <div class="cta-buttons">
+                <a href="tel:0386580797" class="btn btn-call">📞 Call Sophie Now</a>
+                <a href="#pricing" class="btn btn-primary">Get Started for $20/month</a>
+                <a href="#contact" class="btn btn-secondary">Book a Call with Craig</a>
+            </div>
+            <p class="trust-line">Run by <strong>Craig Lambie</strong> – a real human, <strong>Google Maps Local Guide (Level 7, nearly 8)</strong> with 20+ years in business and tech. <a href="https://www.linkedin.com/in/craiglambie42" target="_blank">View LinkedIn Profile</a></p>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem">
+        <div class="container">
+            <h2>When Your Hours Are Wrong Online, Everyone Loses</h2>
+            <div class="problem-content">
+                <p><strong>You have probably lived this story:</strong></p>
+                <p>You check Google Maps, see Open, drive across town and find the door locked.<br>
+                Frustrating, right? It can ruin an otherwise great experience.</p>
+
+                <p><strong>Now flip it around.</strong></p>
+
+                <p>When <em>your</em> business hours are wrong online:</p>
+
+                <ul class="problem-list">
+                    <li>Customers show up when you are closed and leave angry.</li>
+                    <li>They leave bad reviews about wrong hours or never open.</li>
+                    <li>You lose repeat customers and referrals without ever knowing why.</li>
+                    <li>Your team wastes time fielding are you open today calls.</li>
+                </ul>
+
+                <p>All because nobody had time to log into Google, Facebook, Instagram, Yelp, and your website every time something changed:</p>
+                <ul style="margin-left: 40px; margin-top: 15px;">
+                    <li>Public holidays</li>
+                    <li>Staff shortages</li>
+                    <li>Renovations</li>
+                    <li>Seasonal hours</li>
+                    <li>One-off events</li>
+                </ul>
+
+                <div class="highlight-box">
+                    This is exactly the problem True Hours Concierge was created to solve.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution">
+        <div class="container">
+            <h2>What Is True Hours Concierge?</h2>
+            <p class="section-intro"><strong>True Hours Concierge</strong> is a low-cost, high-trust service that keeps your key online profiles updated with <strong>correct hours and essential info</strong>—all year round.</p>
+
+            <div class="solution-benefits">
+                <div class="benefit-card">
+                    <h3>Instead of juggling logins</h3>
+                    <p>No more trying to remember passwords for Google, Facebook, Yelp, and your website.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Instead of guessing which platforms matter</h3>
+                    <p>We handle the platforms your customers actually use to find you.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Instead of remembering to update everything before every holiday</h3>
+                    <p>We proactively reach out before major holidays and events.</p>
+                </div>
+            </div>
+
+            <div style="max-width: 800px; margin: 50px auto; text-align: center; font-size: 18px;">
+                <p><strong>You get:</strong></p>
+                <ul style="list-style: none; margin-top: 20px;">
+                    <li style="padding: 10px 0;">A quick call or message from us once a month</li>
+                    <li style="padding: 10px 0;">Extra check-ins around major holidays and seasonal events</li>
+                    <li style="padding: 10px 0;">Your hours and simple info updated across your chosen platforms</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 20px; font-weight: 600; color: #FF7A1A;">So your customers always see <strong>true hours</strong>, everywhere they look.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Affordable Section -->
+    <section id="affordable">
+        <div class="container">
+            <h2>How Is This So Cheap?</h2>
+            <p class="section-intro">Most social media and online presence packages start at <strong>$500 to $1,500 per month</strong> and quickly climb from there. That is great if you want full-blown marketing campaigns.</p>
+            <p class="section-intro">But many small businesses do not need that.<br>They just need their <strong>hours and basic info to be right</strong>.</p>
+
+            <div class="affordable-reasons">
+                <div class="reason">
+                    <h3>Human founder, AI-powered</h3>
+                    <p>I am a real person using smart AI tools to remove busywork so I spend time where it matters and pass the savings on to you.</p>
+                </div>
+                <div class="reason">
+                    <h3>Focused scope</h3>
+                    <p>We do not run ads or post daily content. We specialise in <strong>keeping your business information accurate</strong>.</p>
+                </div>
+                <div class="reason">
+                    <h3>Simple processes</h3>
+                    <p>Standardised workflows mean low overhead and predictable quality.</p>
+                </div>
+            </div>
+
+            <p class="section-intro" style="margin-top: 40px; font-size: 20px; font-weight: 600;">That is how we keep plans at <strong>$20 to $50 per month</strong>, while still giving you a real person who knows what they are doing.</p>
+        </div>
+    </section>
+
+    <!-- Sophie Section -->
+    <section class="sophie-section">
+        <div class="container">
+            <div class="sophie-content">
+                <div class="sophie-image">
+                    <img src="sophie_carter_agent.png" alt="Sophie Carter - Your True Hours Concierge Assistant">
+                </div>
+                <div class="sophie-bio">
+                    <h2>Meet Sophie Carter - Your Concierge Assistant</h2>
+                    <p>Sophie is your first point of contact at True Hours Concierge. She is here to help you get started, answer your questions, and make sure your business information is always accurate.</p>
+                    <p>Want to have a quick chat about how we can help your business? Sophie can:</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li style="padding: 8px 0; color: white;">Explain how the service works</li>
+                        <li style="padding: 8px 0; color: white;">Help you choose the right plan</li>
+                        <li style="padding: 8px 0; color: white;">Collect your details to get started</li>
+                        <li style="padding: 8px 0; color: white;">Schedule a call with Craig if you need it</li>
+                    </ul>
+                    <div class="phone-number">
+                        <a href="tel:0386580797">03 8658 0797</a>
+                    </div>
+                    <p style="font-size: 16px; font-style: italic; opacity: 0.9; color: white;">Available during business hours. Sophie is an AI assistant backed by real human support from Craig.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="Craig_sig.jpg" alt="Photo of Craig Lambie, founder of True Hours Concierge">
+                </div>
+                <div class="founder-bio">
+                    <h2>Who is Behind True Hours Concierge?</h2>
+                    <p>Hi, I am <strong>Craig Lambie</strong>, founder of True Hours Concierge.</p>
+                    <ul>
+                        <li><strong>Google Maps Local Guide - Level 7 (nearly 8):</strong><br>
+                        I have spent years helping improve local listings adding places, fixing details, updating photos because I care about people actually finding what they are looking for.</li>
+                        <li><strong>20+ years in business and technology:</strong><br>
+                        I have worked across business and tech for two decades, so I understand both sides: how small businesses really operate, and how online platforms actually work.</li>
+                        <li><strong>Real human, not a faceless platform:</strong><br>
+                        You can see my background here: <a href="https://www.linkedin.com/in/craiglambie42" target="_blank">linkedin.com/in/craiglambie42</a></li>
+                    </ul>
+                    <p style="margin-top: 20px; font-style: italic;">True Hours Concierge is the service I wished existed when I spent days trying to find an open business only to run into closed doors because their online hours were wrong.</p>
+                    <p style="font-weight: 600; margin-top: 15px;">I built this to fix that problem for <strong>you</strong> and your customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <div class="container">
+            <h2>How True Hours Concierge Works</h2>
+            <p class="section-intro">Simple 3-Step Process</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Quick Setup (10 to 15 minutes)</h3>
+                    <p>We collect your key details:</p>
+                    <ul>
+                        <li>Business name and locations</li>
+                        <li>Platforms you are on (Google Maps, Facebook, Instagram, Yelp, etc.)</li>
+                        <li>Typical hours and seasonal patterns</li>
+                        <li>Preferred way to reach you (call, SMS, email, WhatsApp)</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Monthly Check-Ins</h3>
+                    <p>Once a month we:</p>
+                    <ul>
+                        <li>Call or message you to confirm if anything has changed</li>
+                        <li>Proactively check in before <strong>major holidays</strong> (Christmas, Easter, public holidays, etc.)</li>
+                        <li>Capture any updates: reduced hours, closures, special days, temporary changes</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>We Update Everything For You</h3>
+                    <p>We log in and update your:</p>
+                    <ul>
+                        <li>Google Business Profile / Maps</li>
+                        <li>Website hours (where possible)</li>
+                        <li>Social platforms included in your plan</li>
+                        <li>Any additional listings in your package</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-weight: 600;">You do not have to remember which logins to use or where to click we handle it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <h2>Simple, Small-Business-Friendly Pricing</h2>
+            <p class="pricing-intro">No long contracts. Month-to-month. Cancel anytime.</p>
+
+            <div class="pricing-cards">
+                <!-- Bronze Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Bronze</div>
+                    <div class="plan-tagline">Essentials Coverage</div>
+                    <div class="plan-price">$20<span>/month</span></div>
+
+                    <p style="margin: 20px 0; color: #4B5563;">We keep your <strong>core presence</strong> accurate:</p>
+
+                    <ul class="plan-features">
+                        <li>Google Business Profile / Maps</li>
+                        <li>Website hours (if you have a simple hours section)</li>
+                        <li>1 social platform (e.g. Facebook or Instagram)</li>
+                        <li>Monthly check-in</li>
+                        <li>Extra check-ins before major holidays</li>
+                        <li>Updates to hours and basic open/closed info</li>
+                    </ul>
+
+                    <a href="#contact" class="plan-cta">Get Started with Bronze</a>
+
+                    <div class="best-for">
+                        <strong>Best for:</strong> Cafes, salons, clinics, tradies, and solo operators who just need the basics handled.
+                    </div>
+                </div>
+
+                <!-- Silver Plan (Featured) -->
+                <div class="pricing-card featured">
+                    <div class="plan-name">Silver</div>
+                    <div class="plan-tagline">Expanded Reach</div>
+                    <div class="plan-price">$35<span>/month</span></div>
+
+                    <p style="margin: 20px 0; color: #4B5563;">Everything in <strong>Bronze</strong>, plus:</p>
+
+                    <ul class="plan-features">
+                        <li>All Bronze features included</li>
+                        <li>2 additional platforms (choose from):</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Facebook Page</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Instagram</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Yelp</li>
+                        <li style="padding-left: 50px; font-size: 14px;">X (Twitter)</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Bluesky</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Mastodon</li>
+                    </ul>
+
+                    <a href="#contact" class="plan-cta">Get Started with Silver</a>
+
+                    <div class="best-for">
+                        <strong>Best for:</strong> Restaurants, local services, and busy main-street businesses where customers might find you in multiple places.
+                    </div>
+                </div>
+
+                <!-- Gold Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Gold</div>
+                    <div class="plan-tagline">Everywhere Your Customers Look</div>
+                    <div class="plan-price">$50<span>/month</span></div>
+
+                    <p style="margin: 20px 0; color: #4B5563;">Everything in <strong>Silver</strong>, plus:</p>
+
+                    <ul class="plan-features">
+                        <li>All Silver features included</li>
+                        <li>Up to 3 more key platforms, such as:</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Apple Maps</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Bing Places</li>
+                        <li style="padding-left: 50px; font-size: 14px;">TripAdvisor</li>
+                        <li style="padding-left: 50px; font-size: 14px;">Local directories relevant to your industry</li>
+                    </ul>
+
+                    <a href="#contact" class="plan-cta">Get Started with Gold</a>
+
+                    <div class="best-for">
+                        <strong>Best for:</strong> Tourism, hospitality, multi-channel local businesses that want consistency across <em>all</em> major listing sites.
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-note">
+                <strong>Small Note on Scope:</strong><br>
+                True Hours Concierge focuses on <strong>hours and core business info</strong> (open/closed times, contact details, basic notices).<br>
+                We are not a social media marketing agency we are your <strong>online accuracy concierge</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Do you change my content or run ads?</div>
+                    <div class="faq-answer">
+                        No. True Hours Concierge is focused solely on keeping your <strong>hours and basic info accurate</strong> across platforms, not running promotions or ad campaigns.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What if I rarely change my hours?</div>
+                    <div class="faq-answer">
+                        Great we will still check in monthly and around holidays. Even if you only change a few times a year, that is exactly when customers are most confused, and those are the times you want to get right.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is this locked into a contract?</div>
+                    <div class="faq-answer">
+                        No. It is month-to-month. You can cancel anytime if you feel you are not getting value.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do you keep it so affordable?</div>
+                    <div class="faq-answer">
+                        By keeping the service focused and leveraging AI tools for the repetitive parts. You still deal with a real person, but we do not waste time on things you do not need.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can you support multiple locations?</div>
+                    <div class="faq-answer">
+                        Yes. Multi-location setups are available contact us for a quick chat and we will price it fairly based on the number of locations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Ready to Make Sure Your Hours Are Always Right?</h2>
+                <p class="form-intro">Stop losing customers to outdated info and wrong opening hours. Let <strong>True Hours Concierge</strong> keep your business details accurate quietly, in the background so you can focus on running your business.</p>
+
+                <form id="contactForm" action="https://hooks.zapier.com/hooks/catch/108808/uwu2uoq/" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="business">Business Name *</label>
+                        <input type="text" id="business" name="business" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plan">Which Plan Interests You? *</label>
+                        <select id="plan" name="plan" required>
+                            <option value="">-- Select a Plan --</option>
+                            <option value="bronze">Bronze - $20/month</option>
+                            <option value="silver">Silver - $35/month</option>
+                            <option value="gold">Gold - $50/month</option>
+                            <option value="not-sure">Not sure yet / Want to discuss</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Which platforms do you currently use? (Select all that apply)</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Google Maps" style="width: auto; margin-right: 8px;">
+                                Google Maps
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Website" style="width: auto; margin-right: 8px;">
+                                Website
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Facebook" style="width: auto; margin-right: 8px;">
+                                Facebook
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Instagram" style="width: auto; margin-right: 8px;">
+                                Instagram
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Yelp" style="width: auto; margin-right: 8px;">
+                                Yelp
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="X (Twitter)" style="width: auto; margin-right: 8px;">
+                                X (Twitter)
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Bluesky" style="width: auto; margin-right: 8px;">
+                                Bluesky
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Mastodon" style="width: auto; margin-right: 8px;">
+                                Mastodon
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Apple Maps" style="width: auto; margin-right: 8px;">
+                                Apple Maps
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Bing Places" style="width: auto; margin-right: 8px;">
+                                Bing Places
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="TripAdvisor" style="width: auto; margin-right: 8px;">
+                                TripAdvisor
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="platforms[]" value="Other" style="width: auto; margin-right: 8px;">
+                                Other
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Anything else you would like us to know? (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your business or any specific needs..."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Get Started Now</button>
+                </form>
+
+                <p class="form-note">
+                    Run by a real person, backed by smart AI.<br>
+                    Check me out on LinkedIn: <a href="https://www.linkedin.com/in/craiglambie42" target="_blank">linkedin.com/in/craiglambie42</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>True Hours Concierge</strong></p>
+            <p style="margin: 10px 0;">Keeping your business hours accurate, everywhere your customers look.</p>
+            <p style="margin-top: 20px;">
+                Founded by <a href="https://www.linkedin.com/in/craiglambie42" target="_blank">Craig Lambie</a> |
+                Google Maps Local Guide Level 7 |
+                20+ Years in Business and Tech
+            </p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                2025 True Hours Concierge. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            const submitButton = this.querySelector('.form-submit');
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+        });
+
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.display = 'none';
+                });
+
+                answer.style.display = isVisible ? 'none' : 'block';
+
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.style.fontWeight = '600';
+                });
+                this.style.fontWeight = isVisible ? '600' : 'bold';
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
