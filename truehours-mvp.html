@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Hours Concierge - Verification MVP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            min-height: 650px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #0A253E;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background: white;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-container {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 30px;
+        }
+
+        .badge-container svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .verification-text {
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .verification-text strong {
+            color: #166640;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #6B7280;
+            margin-top: 8px;
+        }
+
+        .cta-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .cta-section p {
+            font-size: 13px;
+            color: #4B5563;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #166640;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(22, 102, 64, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #0f4d2e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(22, 102, 64, 0.4);
+        }
+
+        .footer {
+            background: #F9FAFB;
+            padding: 15px;
+            text-align: center;
+            font-size: 10px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .error-message {
+            color: #DC2626;
+            background: #FEE2E2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .loading {
+            color: #6B7280;
+            font-size: 14px;
+        }
+
+        /* Domain selector for testing */
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .test-controls select {
+            padding: 8px 12px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .test-controls label {
+            display: block;
+            font-size: 11px;
+            color: #6B7280;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Controls (remove in production) -->
+    <div class="test-controls">
+        <label>Test Domain:</label>
+        <select id="domainSelector" onchange="loadDomain(this.value)">
+            <option value="">-- Select a domain --</option>
+        </select>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <div class="loading">Loading verification data...</div>
+    </div>
+
+    <script>
+        // ============================================
+        // HARDCODED CLIENT DATABASE (MVP)
+        // ============================================
+        const CLIENTS_DB = [
+            {
+                ClientDomain: "truehoursconcierge.com",
+                ClientName: "True Hours Concierge",
+                LastCheckedDateTime: "2025-02-03T09:15:00Z",
+                Socials: {
+                    twitter: "https://twitter.com/truehoursconcierge",
+                    facebook: "https://facebook.com/truehoursconcierge",
+                    linkedin: "https://linkedin.com/company/truehoursconcierge"
+                },
+                Maps: "https://maps.google.com/?q=True+Hours+Concierge+Sydney",
+                LogoFileName: "https://placehold.co/200x200/0A253E/FFFFFF?text=THC"
+            },
+            {
+                ClientDomain: "premiumservices.com.au",
+                ClientName: "Premium Concierge Services",
+                LastCheckedDateTime: "2025-01-25T14:30:00Z",
+                Socials: {
+                    facebook: "https://facebook.com/premiumservices",
+                    instagram: "https://instagram.com/premiumservices"
+                },
+                Maps: "https://maps.google.com/?q=Premium+Concierge+Services+Melbourne",
+                LogoFileName: "https://placehold.co/200x200/166640/FFFFFF?text=PCS"
+            },
+            {
+                ClientDomain: "harbourviewhotel.com.au",
+                ClientName: "Harbour View Hotel",
+                LastCheckedDateTime: "2025-01-28T11:45:00Z",
+                Socials: {
+                    facebook: "https://facebook.com/harbourviewhotel",
+                    instagram: "https://instagram.com/harbourviewhotel",
+                    twitter: "https://twitter.com/harbourviewhotel"
+                },
+                Maps: "https://maps.google.com/?q=Harbour+View+Hotel+Sydney",
+                LogoFileName: "https://placehold.co/200x200/1E3A8A/FFFFFF?text=HVH"
+            },
+            {
+                ClientDomain: "elitewellness.com.au",
+                ClientName: "Elite Wellness & Spa",
+                LastCheckedDateTime: "2025-02-01T08:20:00Z",
+                Socials: {
+                    instagram: "https://instagram.com/elitewellness",
+                    facebook: "https://facebook.com/elitewellness"
+                },
+                Maps: "https://maps.google.com/?q=Elite+Wellness+Spa+Brisbane",
+                LogoFileName: "https://placehold.co/200x200/7C3AED/FFFFFF?text=EWS"
+            },
+            {
+                ClientDomain: "coastalretreat.com.au",
+                ClientName: "Coastal Retreat Resort",
+                LastCheckedDateTime: "2025-01-30T16:00:00Z",
+                Socials: {
+                    instagram: "https://instagram.com/coastalretreat",
+                    facebook: "https://facebook.com/coastalretreat",
+                    twitter: "https://twitter.com/coastalretreat"
+                },
+                Maps: "https://maps.google.com/?q=Coastal+Retreat+Resort+Gold+Coast",
+                LogoFileName: "https://placehold.co/200x200/0891B2/FFFFFF?text=CRR"
+            },
+            {
+                ClientDomain: "urbanbistro.com.au",
+                ClientName: "Urban Bistro & Wine Bar",
+                LastCheckedDateTime: "2025-02-02T19:30:00Z",
+                Socials: {
+                    instagram: "https://instagram.com/urbanbistro",
+                    facebook: "https://facebook.com/urbanbistro"
+                },
+                Maps: "https://maps.google.com/?q=Urban+Bistro+Wine+Bar+Melbourne",
+                LogoFileName: "https://placehold.co/200x200/DC2626/FFFFFF?text=UBW"
+            },
+            {
+                ClientDomain: "skylineapartments.com.au",
+                ClientName: "Skyline Luxury Apartments",
+                LastCheckedDateTime: "2025-01-27T10:00:00Z",
+                Socials: {
+                    facebook: "https://facebook.com/skylineapartments",
+                    linkedin: "https://linkedin.com/company/skylineapartments"
+                },
+                Maps: "https://maps.google.com/?q=Skyline+Luxury+Apartments+Sydney",
+                LogoFileName: "https://placehold.co/200x200/0A253E/FFFFFF?text=SLA"
+            },
+            {
+                ClientDomain: "botanicgardenscafe.com.au",
+                ClientName: "Botanic Gardens Café",
+                LastCheckedDateTime: "2025-01-29T07:45:00Z",
+                Socials: {
+                    instagram: "https://instagram.com/botanicgardenscafe",
+                    facebook: "https://facebook.com/botanicgardenscafe"
+                },
+                Maps: "https://maps.google.com/?q=Botanic+Gardens+Cafe+Adelaide",
+                LogoFileName: "https://placehold.co/200x200/059669/FFFFFF?text=BGC"
+            },
+            {
+                ClientDomain: "peakfitness.com.au",
+                ClientName: "Peak Fitness Studio",
+                LastCheckedDateTime: "2025-02-03T06:00:00Z",
+                Socials: {
+                    instagram: "https://instagram.com/peakfitness",
+                    facebook: "https://facebook.com/peakfitness",
+                    twitter: "https://twitter.com/peakfitness"
+                },
+                Maps: "https://maps.google.com/?q=Peak+Fitness+Studio+Perth",
+                LogoFileName: "https://placehold.co/200x200/EA580C/FFFFFF?text=PFS"
+            },
+            {
+                ClientDomain: "heritagelaw.com.au",
+                ClientName: "Heritage Law Partners",
+                LastCheckedDateTime: "2025-01-26T13:15:00Z",
+                Socials: {
+                    linkedin: "https://linkedin.com/company/heritagelaw",
+                    twitter: "https://twitter.com/heritagelaw"
+                },
+                Maps: "https://maps.google.com/?q=Heritage+Law+Partners+Canberra",
+                LogoFileName: "https://placehold.co/200x200/4B5563/FFFFFF?text=HLP"
+            }
+        ];
+
+        // ============================================
+        // HELPER FUNCTIONS
+        // ============================================
+
+        function normalizeDomain(domain) {
+            return (domain || '').trim().toLowerCase().replace(/^www\./, '');
+        }
+
+        function getClientByDomain(domain) {
+            const normalized = normalizeDomain(domain);
+            return CLIENTS_DB.find(c => normalizeDomain(c.ClientDomain) === normalized);
+        }
+
+        function formatDateShort(isoStr) {
+            const date = new Date(isoStr);
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear().toString().slice(-2)}`;
+        }
+
+        function formatDateFull(isoStr) {
+            return new Date(isoStr).toLocaleString('en-GB', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                timeZoneName: 'short' 
+            });
+        }
+
+        function generateBadgeSVG(dateStr) {
+            const formattedDate = formatDateShort(dateStr);
+            return `
+                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="512" cy="512" r="480" fill="#0A253E" />
+                    <circle cx="512" cy="512" r="400" fill="#E8E8E7" />
+                    <path d="M300 500 L450 650 L750 350" fill="none" stroke="#166640" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="textCurve" d="M 312,750 A 250,250 0 0 0 712,750" fill="none" />
+                    <text font-family="Arial, sans-serif" font-size="52" fill="#0A253E" text-anchor="middle">
+                        <textPath href="#textCurve" startOffset="50%">
+                            Checked: ${formattedDate}
+                        </textPath>
+                    </text>
+                </svg>
+            `;
+        }
+
+        async function loadAndUpdateBadge(container, dateStr) {
+            const formattedDate = `Checked: ${formatDateShort(dateStr)}`;
+            
+            try {
+                const response = await fetch('curved_badge.svg');
+                const svgText = await response.text();
+                
+                // Insert SVG into container
+                container.innerHTML = svgText;
+                
+                // Find and update the textPath element
+                const textPath = container.querySelector('#dateText');
+                if (textPath) {
+                    textPath.textContent = formattedDate;
+                } else {
+                    console.warn('dateText element not found in SVG');
+                }
+            } catch (error) {
+                console.error('Failed to load SVG:', error);
+                container.innerHTML = '<p>Badge unavailable</p>';
+            }
+        }
+
+        async function renderVerificationPage(client) {
+            const container = document.getElementById('mainContainer');
+            
+            container.innerHTML = `
+                <div class="header">
+                    <div class="logo-circle">
+                        <img src="${client.LogoFileName}" alt="${client.ClientName} Logo">
+                    </div>
+                    <h1>${client.ClientName}</h1>
+                    <p>${client.ClientDomain}</p>
+                </div>
+
+                <div class="content">
+                    <div class="badge-container" id="badgeContainer">
+                        <!-- SVG will be loaded here -->
+                    </div>
+
+                    <div class="verification-text">
+                        This site was last checked by <strong>Sophie</strong> at:<br>
+                        <span class="timestamp">${formatDateFull(client.LastCheckedDateTime)}</span>
+                    </div>
+
+                    <div class="cta-section">
+                        <p>Want your site details to be checked by Sophie so your details are always up to date?</p>
+                        <a href="https://truehoursconcierge.com/signup" class="cta-button">Sign Up Now</a>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    Verified by True Hours Concierge &copy; 2026
+                </div>
+            `;
+            
+            // Load and update the badge after rendering
+            const badgeContainer = document.getElementById('badgeContainer');
+            await loadAndUpdateBadge(badgeContainer, client.LastCheckedDateTime);
+        }
+
+        function showError(message) {
+            const container = document.getElementById('mainContainer');
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>⚠️ Verification Not Found</strong><br>
+                    ${message}
+                </div>
+            `;
+        }
+
+        // ============================================
+        // MAIN LOGIC
+        // ============================================
+
+        function loadDomain(domain) {
+            if (!domain) return;
+
+            const client = getClientByDomain(domain);
+            
+            if (client) {
+                renderVerificationPage(client);
+            } else {
+                showError(`No verification data found for domain: ${domain}`);
+            }
+        }
+
+        function init() {
+            // Populate test dropdown
+            const selector = document.getElementById('domainSelector');
+            CLIENTS_DB.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client.ClientDomain;
+                option.textContent = client.ClientDomain;
+                selector.appendChild(option);
+            });
+
+            // Check for ?domain= in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const domainParam = urlParams.get('domain');
+
+            if (domainParam) {
+                loadDomain(domainParam);
+                selector.value = domainParam;
+            } else {
+                // Default to truehoursconcierge.com for demo
+                loadDomain('truehoursconcierge.com');
+                selector.value = 'truehoursconcierge.com';
+            }
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
